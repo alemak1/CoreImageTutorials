@@ -12,6 +12,8 @@
 		BD562B661E90A4F600B24617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD562B651E90A4F600B24617 /* AppDelegate.swift */; };
 		BD562B681E90A4F600B24617 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD562B671E90A4F600B24617 /* ViewController.swift */; };
 		BD562B6D1E90A4F600B24617 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD562B6C1E90A4F600B24617 /* Assets.xcassets */; };
+		BDA370581E91EA0100895A2F /* BlurFilterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA370571E91EA0100895A2F /* BlurFilterGenerator.swift */; };
+		BDA3705A1E91FCF500895A2F /* ColorEffectFilterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA370591E91FCF500895A2F /* ColorEffectFilterGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		BD562B671E90A4F600B24617 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BD562B6C1E90A4F600B24617 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD562B711E90A4F600B24617 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDA370571E91EA0100895A2F /* BlurFilterGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurFilterGenerator.swift; sourceTree = "<group>"; };
+		BDA370591E91FCF500895A2F /* ColorEffectFilterGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorEffectFilterGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				BD562B711E90A4F600B24617 /* Info.plist */,
 				BD2C36531E91098A00A6BED4 /* HelperFunctions.swift */,
 				BD2C36551E91348600A6BED4 /* CIFilterGenerator.swift */,
+				BDA370571E91EA0100895A2F /* BlurFilterGenerator.swift */,
+				BDA370591E91FCF500895A2F /* ColorEffectFilterGenerator.swift */,
 			);
 			path = CoreImageTutorial;
 			sourceTree = "<group>";
@@ -135,9 +141,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDA3705A1E91FCF500895A2F /* ColorEffectFilterGenerator.swift in Sources */,
 				BD562B681E90A4F600B24617 /* ViewController.swift in Sources */,
 				BD562B661E90A4F600B24617 /* AppDelegate.swift in Sources */,
 				BD2C36541E91098A00A6BED4 /* HelperFunctions.swift in Sources */,
+				BDA370581E91EA0100895A2F /* BlurFilterGenerator.swift in Sources */,
 				BD2C36561E91348600A6BED4 /* CIFilterGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

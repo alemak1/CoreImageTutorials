@@ -156,4 +156,16 @@ class CIFilterGenerator{
     }
     
     
+    //MARK: *********** BLUR FILTERS
+    
+    func generateBoxBlurCGImage(cgRect: CGRect, inputImage: CIImage, inputRadius: Double) -> CGImage?{
+        
+        guard let ciImage = BlurFilterGenerator.generateBoxBlurCIImage(inputImage: inputImage, inputRadius: inputRadius) else { return nil }
+        
+        return coreImageContext.createCGImage(ciImage, from: cgRect)
+    }
+    
+
+    
+    
 }

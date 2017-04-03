@@ -132,19 +132,30 @@ class ViewController: UIViewController {
         
         let color1 = CIColor(red: 0.50, green: 0.50, blue: 0.50)
         let color2 = CIColor(red: 0.50, green: 0.50, blue: 0.50)
-        let cgRect = CGRect(x: 0, y: 0, width: 500, height: 500)
+        let cgRect = CGRect(x: 0, y: 0, width: 2000, height: 1500)
         let centerPoint = CIVector(x: 100, y: 50)
         
-        let cgImageRef = filterGenerator.generateStripedCGImage(withFirstStripeColorOf: color1, andSecondStripeColorOf: color2, width: 20.00, contrast: 20.00, cgRect: cgRect, centerPoint: centerPoint)!
+        //let cgImageRef = filterGenerator.generateStripedCGImage(withFirstStripeColorOf: color1, andSecondStripeColorOf: color2, width: 20.00, contrast: 20.00, cgRect: cgRect, centerPoint: centerPoint)!
         
-        let cgImageRef2 = filterGenerator.generateSunbeamCGImage(cgRect: cgRect, inputCenter: centerPoint, inputColor: color2, inputSunRadius: 20.0, inputMaxStriationRadius: 6.58, inputStriationStrength: 0.50, inputStriationContrast: 1.38, inputTime: 0.00)!
+        //let cgImageRef2 = filterGenerator.generateSunbeamCGImage(cgRect: cgRect, inputCenter: centerPoint, inputColor: color2, inputSunRadius: 20.0, inputMaxStriationRadius: 6.58, inputStriationStrength: 0.50, inputStriationContrast: 1.38, inputTime: 0.00)!
         
         //let cgImageRef3 = filterGenerator.generateLenticularHaloCGImage(cgRect: cgRect, inputCenter: centerPoint, inputColor: color1, inputHaloRadius: 15.00, inputHaloWidth: 27.00, inputHaloOverlap: 0.77, inputStriationStrength: 0.50, inputStriationContrast: 1.00, inputTime: 5.00)!
         
-        let cgImageRef4 = filterGenerator.generateCheckerboardCGImage(cgRect: cgRect, inputCenter: centerPoint, color1: color1, color2: color2, inputWidth: 20.00, inputSharpness: 1.00)!
+        //let cgImageRef4 = filterGenerator.generateCheckerboardCGImage(cgRect: cgRect, inputCenter: centerPoint, color1: color1, color2: color2, inputWidth: 20.00, inputSharpness: 1.00)!
+        
+        let cgImage = #imageLiteral(resourceName: "NationalPalaceFrontEntrance1").cgImage!
+        let ciImage = CIImage(cgImage: cgImage)
+        
+        let cgImageRef5 = filterGenerator.generateBoxBlurCGImage(cgRect: cgRect, inputImage: ciImage, inputRadius: 30.0)!
      
+        
+        let vector = CIVector(x: 150, y: 150)
+        let zoomBlurCIImage = BlurFilterGenerator.generateZoomBlurCIImage(inputImage: ciImage, inputCenter: vector, inputAmount: 10)!
+        
+        let motionBlurImage = BlurFilterGenerator.generateMotionBlurCIImage(inputImage: ciImage, inputRadius: 20.0, inputAngle: 20.0)!
+        
     
-        afterFilterImageView.image = UIImage(cgImage: cgImageRef4)
+        afterFilterImageView.image = UIImage(ciImage: motionBlurImage)
         
        
         
