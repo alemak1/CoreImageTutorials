@@ -16,10 +16,14 @@ class ViewController: UIViewController {
     var afterFilterImageView = UIImageView()
     
     var mapView = MKMapView()
+    let mapViewTapGR = UITapGestureRecognizer(target: self, action: #selector(ViewController.showMapViewModally))
+    
     var anotherMapView = MKMapView()
 
     var mapViewLabel = UILabel()
     var anotherMapViewLabel = UILabel()
+    var locationOptionLabel = UILabel()
+    var anotherLocationOptionLabel = UILabel()
     
     var mapsHaveLoaded: Bool = false
     
@@ -47,14 +51,23 @@ class ViewController: UIViewController {
    
         view.addSubview(mapView)
         view.addSubview(anotherMapView)
+        view.addSubview(locationOptionLabel)
+        view.addSubview(anotherLocationOptionLabel)
         
         mapView.translatesAutoresizingMaskIntoConstraints = false
         anotherMapView.translatesAutoresizingMaskIntoConstraints = false
+        locationOptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        anotherLocationOptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        locationOptionLabel.textColor = UIColor.cyan
+        locationOptionLabel.adjustsFontSizeToFitWidth = true
         
+        anotherLocationOptionLabel.textColor = UIColor.cyan
+        anotherLocationOptionLabel.adjustsFontSizeToFitWidth = true
         
         configureDefaultMapViewConstraints()
         configureDefaultLabelConstraints()
+        configureLocationOptionLabel()
     }
     
     
@@ -70,23 +83,28 @@ class ViewController: UIViewController {
         anotherMapView.delegate = self
         
         
-        let mapSpan = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let mapSpan = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+        
+        //Nana BTS Station
+        let latCoord1 = 13.740505
+        let longCoord1 = 100.555421
+        let locationCoordinate1 = CLLocationCoordinate2D(latitude: latCoord1, longitude: longCoord1)
         
         
-        let latCoord = 13.756331
-        let longCoord = 100.501765
-        let locationCoordinate = CLLocationCoordinate2D(latitude: latCoord, longitude: longCoord)
+        //Asok BTS Station
+        let latCoord2 = 13.737009
+        let longCoord2 = 100.560388
+        let locationCoordinate2 = CLLocationCoordinate2D(latitude: latCoord2, longitude: longCoord2)
         
-        mapView.region = MKCoordinateRegion(center: locationCoordinate, span: mapSpan)
+        
+       
+        mapView.region = MKCoordinateRegion(center: locationCoordinate1, span: mapSpan)        
         mapView.isScrollEnabled = false
         mapView.isZoomEnabled = false
         
+        anotherMapView.region = MKCoordinateRegion(center: locationCoordinate2, span: mapSpan)
         anotherMapView.isScrollEnabled = false
         anotherMapView.isZoomEnabled = false
-        
-        anotherMapView.region = MKCoordinateRegion(center: locationCoordinate, span: mapSpan)
-        anotherMapView.isScrollEnabled = true
-        anotherMapView.isZoomEnabled = true
         
         mapViewLabel.text = "Starting Location"
         mapViewLabel.textColor = UIColor.cyan
@@ -94,14 +112,36 @@ class ViewController: UIViewController {
         anotherMapViewLabel.text = "Destination"
         anotherMapViewLabel.textColor = UIColor.cyan
         
-        let mapViewTapGR = UITapGestureRecognizer(target: self, action: #selector(ViewController.showMapViewModally))
-        mapView.addGestureRecognizer(mapViewTapGR)
+       
+        mapView.addGestureRecognizer(self.mapViewTapGR)
         
         
         
         let anotherMapViewTapGR = UITapGestureRecognizer(target: self, action: #selector(ViewController.showMapViewModally))
         anotherMapView.addGestureRecognizer(anotherMapViewTapGR)
         
+        
+        let currentLocationTapGR = UITapGestureRecognizer(target: self, action: #selector(ViewController.configureUserLocationForStartingPoint(sender:)))
+        locationOptionLabel.text = "Use Current Location"
+        locationOptionLabel.addGestureRecognizer(currentLocationTapGR)
+        
+        anotherLocationOptionLabel.textColor = UIColor.cyan
+        anotherLocationOptionLabel.text = "Use Current Location"
+        
+        
+        addPreConfiguredAnnotations()
+        
+        
+    }
+    
+    func configureUserLocationForStartingPoint(sender: UITapGestureRecognizer){
+        
+        mapView.removeGestureRecognizer(self.mapViewTapGR)
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+        
+        mapView.centerCoordinate = anotherMapView.centerCoordinate//mapView.userLocation.coordinate
+        mapViewLabel.text = "Another Starting Location"
     }
     
     
@@ -221,6 +261,26 @@ class ViewController: UIViewController {
         
     }
     
+    func configureLocationOptionLabel(){
+        
+        
+        
+        NSLayoutConstraint.activate([
+            locationOptionLabel.centerXAnchor.constraint(equalTo: mapView.centerXAnchor, constant: 0.00),
+            locationOptionLabel.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: 10.0),
+            locationOptionLabel.widthAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 0.90)
+            ])
+        
+        NSLayoutConstraint.activate([
+            anotherLocationOptionLabel.centerXAnchor.constraint(equalTo: anotherMapView.centerXAnchor, constant: 0.00),
+            anotherLocationOptionLabel.topAnchor.constraint(equalTo: anotherMapView.bottomAnchor, constant: 10.00),
+            anotherLocationOptionLabel.widthAnchor.constraint(equalTo: anotherMapView.widthAnchor, multiplier: 0.90)
+            ])
+        
+        
+    }
+
+    
     private func configureSideBySideConstraints(forFirstSubview firstSubview: UIView, andSecondSubView secondSubView: UIView){
         
         firstSubview.translatesAutoresizingMaskIntoConstraints = false
@@ -290,6 +350,49 @@ class ViewController: UIViewController {
             self.anotherMapViewHorizontalConstraint
             ])
         
+    }
+
+    
+    
+    func addPreConfiguredAnnotations(){
+        
+        var sampleAnnotations = [MKAnnotation]()
+        
+        let nanaLat = 13.740505
+        let nanaLong = 100.555421
+        let nanaLocation = CLLocationCoordinate2D(latitude: nanaLat, longitude: nanaLong)
+        let nanaStation = TouristSpot(coordinate: nanaLocation, title: "Nana BTS Station", subtitle: "A BTS stop on the Bangkok SkyTrain", siteDescription: "A stop on the Bangkok SkyTrain")
+        sampleAnnotations.append(nanaStation)
+        
+        let lat1 = 13.737718
+        let long1 = 100.560350
+        let location1 = CLLocationCoordinate2D(latitude: lat1, longitude: long1)
+        let touristSpot1 = TouristSpot(coordinate: location1, title: "Terminal 21", subtitle: "Shopping Center", siteDescription: "A great place to go shopping")
+        
+        sampleAnnotations.append(touristSpot1)
+        
+        let lat2 = 13.737009
+        let long2 = 100.560388
+        let location2 = CLLocationCoordinate2D(latitude: lat2, longitude: long2)
+        let touristSpot2 = TouristSpot(coordinate: location2, title: "Asok Station", subtitle: "BTS(SkyTrain) Station", siteDescription: "A stop on Bangkok's BTS SkyTrain")
+        sampleAnnotations.append(touristSpot2)
+        
+        let lat3 = 13.737561
+        let long3 = 100.559165
+        let location3 = CLLocationCoordinate2D(latitude: lat3, longitude: long3)
+        let touristSpot3 = TouristSpot(coordinate: location3, title: "Sheraton Hotel", subtitle: "5-Star Hotel", siteDescription: "A 5-star hotel with beautiful accomdations and also connected directly to the subway station")
+        sampleAnnotations.append(touristSpot3)
+        
+        let lat4 = 13.737764
+        let long4 = 100.558789
+        let location4 = CLLocationCoordinate2D(latitude: lat4, longitude: long4)
+        let touristSpot4 = TouristSpot(coordinate: location4, title: "Times Square Shopping Mall", subtitle: "A great place to go shopping", siteDescription: "A high-end shopping mall with a food court in the basement")
+        sampleAnnotations.append(touristSpot4)
+        
+        
+       mapView.addAnnotations(sampleAnnotations)
+        anotherMapView.addAnnotations(sampleAnnotations)
+    
     }
 
   

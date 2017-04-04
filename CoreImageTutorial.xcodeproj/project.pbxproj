@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD2C36541E91098A00A6BED4 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2C36531E91098A00A6BED4 /* HelperFunctions.swift */; };
 		BD2C36561E91348600A6BED4 /* CIFilterGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2C36551E91348600A6BED4 /* CIFilterGenerator.swift */; };
+		BD2C7A831E93AFF6007A988C /* TouristSpot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2C7A821E93AFF6007A988C /* TouristSpot.swift */; };
 		BD3061C11E937EF800484062 /* ModalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3061C01E937EF800484062 /* ModalMapViewController.swift */; };
 		BD3061C31E9385AB00484062 /* ModalMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3061C21E9385AB00484062 /* ModalMapVC.swift */; };
 		BD562B661E90A4F600B24617 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD562B651E90A4F600B24617 /* AppDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* Begin PBXFileReference section */
 		BD2C36531E91098A00A6BED4 /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		BD2C36551E91348600A6BED4 /* CIFilterGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIFilterGenerator.swift; sourceTree = "<group>"; };
+		BD2C7A821E93AFF6007A988C /* TouristSpot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouristSpot.swift; sourceTree = "<group>"; };
 		BD3061C01E937EF800484062 /* ModalMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalMapViewController.swift; sourceTree = "<group>"; };
 		BD3061C21E9385AB00484062 /* ModalMapVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalMapVC.swift; sourceTree = "<group>"; };
 		BD562B621E90A4F600B24617 /* CoreImageTutorial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreImageTutorial.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 			children = (
 				BDA3706B1E9214B500895A2F /* FilterGenerators */,
 				BD562B651E90A4F600B24617 /* AppDelegate.swift */,
+				BD2C7A821E93AFF6007A988C /* TouristSpot.swift */,
 				BD3061C01E937EF800484062 /* ModalMapViewController.swift */,
 				BD562B671E90A4F600B24617 /* ViewController.swift */,
 				BD562B6C1E90A4F600B24617 /* Assets.xcassets */,
@@ -187,6 +190,7 @@
 				BDA370601E9213CC00895A2F /* GradientFilterGenerator.swift in Sources */,
 				BD562B681E90A4F600B24617 /* ViewController.swift in Sources */,
 				BD562B661E90A4F600B24617 /* AppDelegate.swift in Sources */,
+				BD2C7A831E93AFF6007A988C /* TouristSpot.swift in Sources */,
 				BD3061C11E937EF800484062 /* ModalMapViewController.swift in Sources */,
 				BDA3705C1E92054B00895A2F /* TransitionsFilterGenerator.swift in Sources */,
 				BD2C36541E91098A00A6BED4 /* HelperFunctions.swift in Sources */,
